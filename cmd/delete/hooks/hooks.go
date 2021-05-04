@@ -37,7 +37,7 @@ func NewHooksCmd() *cobra.Command {
 		`),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if hookid == "" {
-				return &cmdutil.FlagError{Err: errors.New("`hookid` is required argument")}
+				return &cmdutil.FlagError{Err: errors.New("`--hookid` is required argument")}
 			}
 			return deleteHooks()
 		},
@@ -68,7 +68,6 @@ func deleteHooks() error {
 	if option != "Y" {
 		return nil
 	}
-	//fmt.Println(hookid)
 	isDeleted, err := delete()
 	if err != nil {
 		return err

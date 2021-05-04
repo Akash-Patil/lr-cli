@@ -20,9 +20,9 @@ type HooksResponse struct {
 	} `json:"Data"`
 }
 
-func GetHooks() (*HooksResponse, error) {
+func Hooks(method string, body string) (*HooksResponse, error) {
 	hooks := conf.AdminConsoleAPIDomain + "/integrations/webhook?"
-	resp, err := request.Rest(http.MethodGet, hooks, nil, "")
+	resp, err := request.Rest(method, hooks, nil, body)
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +35,7 @@ func GetHooks() (*HooksResponse, error) {
 }
 
 func CheckHookID(hookid string) (bool, error) {
-	Hooks, err := GetHooks()
+	Hooks, err := Hooks(http.MethodGet, "")
 	if err != nil {
 		return false, err
 	}

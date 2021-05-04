@@ -2,6 +2,7 @@ package hooks
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/loginradius/lr-cli/api"
@@ -13,7 +14,7 @@ func NewHooksCmd() *cobra.Command {
 		Use:   "hooks",
 		Short: "Gets hooks",
 		Long: heredoc.Doc(`
-		This command fetches the list of webhooks configured woth an App.
+		This command fetches the list of webhooks configured with an App.
 		`),
 		Example: heredoc.Doc(`
 			$ lr get hooks
@@ -34,7 +35,7 @@ func getHooks() error {
 	if !checkPlan {
 		return nil
 	}
-	Hooks, err := api.GetHooks()
+	Hooks, err := api.Hooks(http.MethodGet, "")
 	if err != nil {
 		return err
 	}
