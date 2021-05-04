@@ -33,3 +33,16 @@ func GetHooks() (*HooksResponse, error) {
 	}
 	return &resultResp, nil
 }
+
+func CheckHookID(hookid string) (bool, error) {
+	Hooks, err := GetHooks()
+	if err != nil {
+		return false, err
+	}
+	for i := 0; i < len(Hooks.Data); i++ {
+		if hookid == Hooks.Data[i].ID {
+			return true, nil
+		}
+	}
+	return false, nil
+}

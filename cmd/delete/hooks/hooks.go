@@ -55,12 +55,20 @@ func deleteHooks() error {
 	if !checkPlan {
 		return nil
 	}
+	checkHookID, err := api.CheckHookID(hookid)
+	if err != nil {
+		return err
+	}
+	if !checkHookID {
+		fmt.Println("Hook ID does not exist.")
+		return nil
+	}
 	fmt.Printf("Are you sure you want to proceed ? Press Y to continue: ")
 	fmt.Scanf("%s", &option)
 	if option != "Y" {
 		return nil
 	}
-	fmt.Println(hookid)
+	//fmt.Println(hookid)
 	isDeleted, err := delete()
 	if err != nil {
 		return err
